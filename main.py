@@ -1,8 +1,19 @@
 import requests, json
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
 
 
 app = FastAPI()
+
+
+@app.get("/")
+async def redirect_to_versions():
+    return RedirectResponse("/api/versions")
+
+
+@app.get("/api")
+async def redirect_api_to_versions():
+    return RedirectResponse("/api/versions")
 
 
 @app.get("/api/versions")
