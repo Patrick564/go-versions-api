@@ -18,7 +18,7 @@ async def redirect_api_to_versions():
 
 @app.get("/api/versions")
 async def get_all_versions():
-    res = requests.get("https://raw.githubusercontent.com/Patrick564/golang-versions-list/main/data/versions.json")
+    res = requests.get("https://raw.githubusercontent.com/Patrick564/go-versions-scrap/main/data/versions.json")
     content = json.loads(res.text)[0]["versions"]
 
     result = dict()
@@ -34,7 +34,7 @@ async def get_all_versions():
 
 @app.get("/api/versions/{version}")
 async def get_selected_version(version: str):
-    res = requests.get("https://raw.githubusercontent.com/Patrick564/golang-versions-list/main/data/selected_versions.json")
+    res = requests.get("https://raw.githubusercontent.com/Patrick564/go-versions-scrap/main/data/selected_versions.json")
     all_versions = json.loads(res.text)[0]["all_versions"]
 
     content = all_versions[version]
