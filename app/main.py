@@ -1,4 +1,4 @@
-import requests, json
+import requests, json, uvicorn, os
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 
@@ -13,6 +13,10 @@ async def redirect_to_versions():
 
 @app.get("/api")
 async def redirect_api_to_versions():
+    return RedirectResponse("/api/versions")
+
+@app.get("/api/docs")
+async def swagger_documentation():
     return RedirectResponse("/api/versions")
 
 
@@ -49,3 +53,12 @@ async def get_selected_version(version: str):
         })
 
     return result
+
+
+if __name__ == "__main__":
+    port = os.getenv("PORT")
+
+    if port is None:
+        port = "8080"
+
+    uvicorn.run(app, host="0.0.0.0", port=int(port))
